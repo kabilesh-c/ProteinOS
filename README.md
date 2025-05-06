@@ -72,7 +72,7 @@ src/
 
 ## Deployment
 
-This project is deployed on Vercel. You can view the live site at [https://proteinos.vercel.app/](https://proteinos.vercel.app/).
+This project is deployed on Vercel.
 
 To deploy your own instance:
 1. Fork this repository

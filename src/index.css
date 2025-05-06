@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 260 71% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 259 60% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 259 64% 6%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 260 74% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 190 95% 39%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 260 40% 20%;
+    --muted-foreground: 210 40% 80%;
+
+    --accent: 140 80% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 260 30% 30%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 260 74% 65%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .goo-blob {
+    @apply absolute bg-primary/40 rounded-full filter blur-xl opacity-70 animate-blob;
+    mix-blend-mode: screen;
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl md:text-5xl font-bold text-white relative z-10 mb-4;
+    text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+  }
+
+  .section-subtitle {
+    @apply text-xl md:text-2xl text-secondary/90 font-medium mb-8;
+  }
+
+  .glass-card {
+    @apply bg-card/30 backdrop-blur-lg border border-primary/20 rounded-xl shadow-lg 
+           relative overflow-hidden p-6 md:p-8;
+  }
+
+  .glow-effect {
+    @apply relative;
+  }
+  
+  .glow-effect::after {
+    content: "";
+    @apply absolute inset-0 -z-10 bg-glow-conic blur-2xl opacity-30;
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  .nav-link {
+    @apply relative px-4 py-2 text-muted-foreground hover:text-white transition-colors duration-300
+           after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 
+           after:bg-secondary after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .nav-link.active {
+    @apply text-white after:w-full;
+  }
+
+  .step-marker {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold
+           border border-primary bg-background text-primary z-10;
+  }
+
+  .step-connector {
+    @apply absolute top-4 left-4 h-full w-0.5 -z-10 bg-gradient-to-b from-primary to-transparent;
+  }
+
+  /* For gooey effects */
+  .gooey-button {
+    position: relative;
+    overflow: hidden;
+    filter: url('#gooey-filter');
+  }
+
+  .gooey-button .bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  .gooey-button .bubble {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate3d(0, 150%, 0);
+    transition: transform 0.2s;
+  }
+
+  .gooey-button:hover .bubble {
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.8s;
+  }
+
+  /* Ripple effect styles */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  @keyframes ripple-animation {
+    to {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse-glow {
+    0% {
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    }
+  }
+
+  @keyframes typing-dot {
+    0%, 60%, 100% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .typing-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+    opacity: 0.6;
+    animation: typing-dot 1.5s infinite;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes ping-slow {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    70% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+  .animate-ping-slow {
+    animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full hover:bg-primary/70 transition-colors;
+}
+
+/* Three.js canvas container */
+.canvas-container {
+  @apply absolute top-0 left-0 w-full h-full -z-10;
+}
